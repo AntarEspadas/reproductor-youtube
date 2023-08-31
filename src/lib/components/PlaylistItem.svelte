@@ -10,7 +10,8 @@
 	<!-- <h1>{item.snippet.title}</h1> -->
 	<div class="image" style="background-image: url({url});">
 		{#if iframeVisible}
-			<iframe
+			<YoutubePlayer videoId={item.snippet.resourceId.videoId} {index} />
+			<!-- <iframe
 				width="100%"
 				height="100%"
 				src="https://www.youtube-nocookie.com/embed/{item.snippet.resourceId
@@ -20,15 +21,13 @@
 				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 				allowfullscreen
 				style="opacity: {$opacity};"
-			/>
+			/> -->
 		{/if}
 	</div>
 </div>
 
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte'
-	import { tweened } from 'svelte/motion'
-	import { cubicOut } from 'svelte/easing'
 	import type { PlaylistItem } from '$lib/youtube/types'
 	import YoutubePlayer from './YoutubePlayer.svelte'
 
@@ -44,11 +43,6 @@
 	let iframeVisible = false
 
 	let div: HTMLDivElement | null = null
-
-	const opacity = tweened(0, {
-		duration: 1000,
-		easing: cubicOut
-	})
 
 	$: thumbnails = item.snippet.thumbnails
 	$: url =
@@ -66,12 +60,8 @@
 			// el timeout terminara, no mostrar el iframe
 			if (selected) iframeVisible = true
 		}, 400)
-		setTimeout(() => {
-			opacity.set(1)
-		}, 1000)
 	} else {
 		iframeVisible = false
-		opacity.set(0)
 	}
 
 	const dispatch = createEventDispatcher<{
