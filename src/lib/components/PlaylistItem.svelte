@@ -1,10 +1,11 @@
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
 	style="--padding: {startEndMargin}px; --margin: {margin}px; --width: {width}px; --scale: {scale};"
 	class="playlist-item"
 	class:selected
+	role="button"
+	tabindex={index}
 	on:click={handleClick}
+	on:keypress={(e) => e.key === 'Enter' && handleClick()}
 	bind:this={div}
 >
 	<!-- <h1>{item.snippet.title}</h1> -->
