@@ -10,18 +10,11 @@
 	<!-- <h1>{item.snippet.title}</h1> -->
 	<div class="image" style="background-image: url({url});">
 		{#if iframeVisible}
-			<YoutubePlayer videoId={item.snippet.resourceId.videoId} {index} />
-			<!-- <iframe
-				width="100%"
-				height="100%"
-				src="https://www.youtube-nocookie.com/embed/{item.snippet.resourceId
-					.videoId}?amp;controls=1&autoplay=1"
-				title="YouTube video player"
-				frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-				allowfullscreen
-				style="opacity: {$opacity};"
-			/> -->
+			<YoutubePlayer
+				videoId={item.snippet.resourceId.videoId}
+				{index}
+				on:stateChange={handleStateChange}
+			/>
 		{/if}
 	</div>
 </div>
@@ -66,6 +59,7 @@
 
 	const dispatch = createEventDispatcher<{
 		click: { item: PlaylistItem; scroll: number }
+		stateChange: { index: number; videoId: string; state: YT.PlayerState; scroll: number }
 	}>()
 
 	onMount(() => {
@@ -86,8 +80,18 @@
 		return scale
 	}
 	function handleClick() {
-		const scroll = index * (width + margin)
+		const scroll = getScroll()
 		dispatch('click', { item, scroll })
+	}
+
+	function handleStateChange(
+		e: CustomEvent<{ index: number; state: YT.PlayerState; videoId: string }>
+	) {
+		dispatch('stateChange', { ...e.detail, scroll: getScroll() })
+	}
+
+	function getScroll() {
+		return index * (width + margin)
 	}
 </script>
 

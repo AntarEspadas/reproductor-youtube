@@ -3,10 +3,14 @@
 </div>
 
 <script lang="ts">
-	import { onMount } from 'svelte'
+	import { createEventDispatcher, onMount } from 'svelte'
 
 	export let videoId: string
 	export let index: number
+
+	const dispatch = createEventDispatcher<{
+		stateChange: { index: number; videoId: string; state: YT.PlayerState }
+	}>()
 
 	let visible = false
 
@@ -47,8 +51,8 @@
 		}
 
 		function onPlayerStateChange(e: YT.OnStateChangeEvent) {
-			console.log(e.data)
 			if (e.data === 1) visible = true
+			dispatch('stateChange', { index, videoId, state: e.data })
 		}
 	})
 </script>

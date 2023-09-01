@@ -16,6 +16,7 @@
 			selected={item.id === selectedId}
 			parentWidth={clientWidth}
 			on:click={handleItemClick}
+			on:stateChange={handleStateChange}
 		/>
 	{/each}
 </div>
@@ -37,15 +38,19 @@
 	$: padding = clientWidth / 2 - 225
 	$: margin = windowWidth / 2 - 750
 
-	async function handleItemClick(e: CustomEvent<{ item: PlaylistItem; scroll: number }>) {
-		const scroll = e.detail.scroll
+	async function selectItem(id: string, scroll: number) {
+		selectedId = id
 		selectedId = ''
+		// Esperar a que se apliquen los cambios
 		await tick()
 		div?.scrollTo({ left: scroll, behavior: 'smooth' })
 		// Esperar a que termine da hacerse scroll antes de actualizar el DOM
-		setTimeout(() => {
-			selectedId = e.detail.item.id
-		})
+		selectedId = id
+	}
+
+	async function handleItemClick(e: CustomEvent<{ item: PlaylistItem; scroll: number }>) {
+		const scroll = e.detail.scroll
+		selectItem(e.detail.item.id, scroll)
 	}
 
 	function handleScroll(e: Event) {
@@ -61,6 +66,17 @@
 			const selectedIndex = Math.round(scroll / (width + margin))
 			selectedId = playlistItems.items[selectedIndex].id
 		}, 225)
+	}
+
+	function handleStateChange(e: {
+		detail: { index: number; videoId: string; state: YT.PlayerState; scroll: number }
+	}) {
+		if (e.detail.state !== YT.PlayerState.ENDED) return
+		const index = e.detail.index
+		const nextId = playlistItems.items[index + 1]?.id
+		if (!nextId) return
+		const scroll = e.detail.scroll + width + margin
+		selectItem(nextId, scroll)
 	}
 
 	onMount(() => {
