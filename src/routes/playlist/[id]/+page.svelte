@@ -16,7 +16,7 @@
 	let selectedId = ''
 
 	async function getPlaylistItems() {
-		const result = await youtubeApi.playlistItems('PL6t2WAImyGeWGF5vtLv0wvqQUovCa445O')
+		const result = await youtubeApi.playlistItems(data.playlistId)
 		selectedId = result.items[0].id
 		return result
 	}
