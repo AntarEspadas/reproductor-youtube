@@ -1,10 +1,10 @@
 import type { PageLoad } from './$types'
-import { YoutubeApi } from '$lib/youtube'
+import { youtubeApi } from '$lib/services'
 
 export const load: PageLoad = ({ url }) => {
 	const query = url.searchParams.get('q') ?? ''
 	return Promise.resolve({
-		youtbeApi: new YoutubeApi('AIzaSyAFz27nx2r3vK09bOBkQi4LZKquWSkoBPU'),
+		youtubeApi,
 		query
 	})
 }

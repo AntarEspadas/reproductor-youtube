@@ -17,7 +17,7 @@
 	import { onMount } from 'svelte'
 
 	export let data: PageData
-	$: youtubeApi = data.youtbeApi
+	$: youtubeApi = data.youtubeApi
 
 	let promise: Promise<[PlaylistItems, Item]>
 

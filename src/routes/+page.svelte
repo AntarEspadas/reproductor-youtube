@@ -17,7 +17,7 @@
 	let searchResults: PlaylistSearchResult | null = null
 	let playlistItem: Item | null = null
 
-	$: youtubeApi = data.youtbeApi
+	$: youtubeApi = data.youtubeApi
 
 	onMount(() => {
 		if (query !== '') {
