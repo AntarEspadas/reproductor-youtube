@@ -1,5 +1,5 @@
 <div
-	style="--padding: {startEndMargin}px; --margin: {margin}px; --width: {width}px; --scale: {scale};"
+	style="--padding: {startEndMargin}px; --margin: {margin}px; --width: {width}px; --scale: {scale}; --url: url({url});"
 	class="playlist-item"
 	class:selected
 	role="button"
@@ -8,21 +8,18 @@
 	on:keypress={(e) => e.key === 'Enter' && handleClick()}
 	bind:this={div}
 >
-	<!-- <h1>{item.snippet.title}</h1> -->
-	<div class="image" style="background-image: url({url});">
-		{#if iframeVisible}
-			<YoutubePlayer
-				videoId={item.snippet.resourceId.videoId}
-				{index}
-				on:stateChange={handleStateChange}
-			/>
-		{/if}
-		{#if !selected}
-			<div class="overlay">
-				<span class="material-symbols-outlined"> play_arrow </span>
-			</div>
-		{/if}
-	</div>
+	{#if iframeVisible}
+		<YoutubePlayer
+			videoId={item.snippet.resourceId.videoId}
+			{index}
+			on:stateChange={handleStateChange}
+		/>
+	{/if}
+	{#if !selected}
+		<div class="overlay">
+			<span class="material-symbols-outlined"> play_arrow </span>
+		</div>
+	{/if}
 </div>
 
 <script lang="ts">
@@ -107,14 +104,16 @@
 		margin-right: var(--margin)
 		animation: shrink 0.2s ease-in-out
 		scale: var(--scale)
-		.image
-			width: var(--width)
-			aspect-ratio: 16/9
-			background-position: center
-			background-size: cover
-			display: flex
-			align-items: center
-			justify-content: center
+		background-color: red
+		flex-shrink: 0
+		width: var(--width)
+		aspect-ratio: 16/9
+		background-position: center
+		background-size: cover
+		display: flex
+		align-items: center
+		justify-content: center
+		background-image: var(--url)
 
 	.playlist-item:hover
 		cursor: pointer
