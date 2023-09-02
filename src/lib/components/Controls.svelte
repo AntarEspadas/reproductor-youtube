@@ -1,10 +1,6 @@
 <div class="controls">
 	<!-- Botón repetir -->
-	<IconButton
-		icon={loopIcon}
-		highlight={loop !== 'none'}
-		on:click={() => dispatch('loopClicked')}
-	/>
+	<IconButton icon={loopIcon} highlight={loop !== 'none'} on:click={handleLoopClicked} />
 	<!-- Botón de regresar -->
 	<IconButton icon="skip_previous" on:click={() => dispatch('previousClicked')} />
 	<!-- Botón de play-pausa -->
@@ -30,10 +26,15 @@
 	const dispatch = createEventDispatcher<{
 		playPauseClicked: void
 		shuffleClicked: void
-		loopClicked: void
 		nextClicked: void
 		previousClicked: void
 	}>()
+
+	function handleLoopClicked() {
+		if (loop === 'none') loop = 'one'
+		else if (loop === 'one') loop = 'all'
+		else loop = 'none'
+	}
 </script>
 
 <style lang="sass">

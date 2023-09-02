@@ -1,6 +1,7 @@
-<PlaylistItemsComponent {playlistItems} />
+<PlaylistItemsComponent {playlistItems} {loopMode} />
 <Controls
 	playing={[1, 3].includes($playerState)}
+	bind:loop={loopMode}
 	on:playPauseClicked={handlePlayPause}
 	on:nextClicked={() => ($selectedTrack += 1)}
 	on:previousClicked={() => ($selectedTrack -= 1)}
@@ -11,8 +12,11 @@
 	import PlaylistItemsComponent from './PlaylistItems.svelte'
 	import type { PlaylistItems } from '$lib/youtube/types'
 	import { playerState, selectedTrack } from '$lib/stores'
+	import type { LoopMode } from './types'
 
 	export let playlistItems: PlaylistItems
+
+	let loopMode: LoopMode = 'none'
 
 	function handlePlayPause() {
 		if ([1, 3].includes($playerState)) {

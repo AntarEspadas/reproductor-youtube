@@ -27,8 +27,10 @@
 	import type { PlaylistItems, Item } from '$lib/youtube/types'
 	import { onMount, tick } from 'svelte'
 	import { selectedTrack, playerState } from '$lib/stores'
+	import type { LoopMode } from './types'
 
 	export let playlistItems: PlaylistItems
+	export let loopMode: LoopMode
 
 	let scroll = 0
 	let clientWidth = 0
@@ -46,7 +48,12 @@
 	}
 
 	$: if ($playerState === 0) {
-		$selectedTrack += 1
+		if (loopMode === 'one') $playerState = 1
+		else if (loopMode === 'all')
+			if ($selectedTrack === playlistItems.items.length - 1) $selectedTrack = 0
+			else $selectedTrack += 1
+		else if (loopMode === 'none' && $selectedTrack !== playlistItems.items.length - 1)
+			$selectedTrack += 1
 	}
 
 	function getWidth(windowWidth: number) {
