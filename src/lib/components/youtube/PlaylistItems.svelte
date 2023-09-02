@@ -28,9 +28,11 @@
 	import { onMount, tick } from 'svelte'
 	import { selectedTrack, playerState } from '$lib/stores'
 	import type { LoopMode } from './types'
+	import { getRandomIndex } from '$lib/util'
 
 	export let playlistItems: PlaylistItems
 	export let loopMode: LoopMode
+	export let shuffle: boolean
 
 	let scroll = 0
 	let clientWidth = 0
@@ -59,7 +61,9 @@
 
 	$: if ($playerState === 0) {
 		if (loopMode === 'one') $playerState = 1
-		else if (loopMode === 'all')
+		else if (shuffle) {
+			$selectedTrack = getRandomIndex(playlistItems.items.length, $selectedTrack)
+		} else if (loopMode === 'all')
 			if ($selectedTrack === playlistItems.items.length - 1) $selectedTrack = 0
 			else $selectedTrack += 1
 		else if (loopMode === 'none' && $selectedTrack !== playlistItems.items.length - 1)

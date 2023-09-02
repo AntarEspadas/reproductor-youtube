@@ -8,7 +8,7 @@
 	<!-- Botón de saltar -->
 	<IconButton icon="skip_next" on:click={() => dispatch('nextClicked')} />
 	<!-- Botón aleatorio -->
-	<IconButton icon="shuffle" highlight={shuffle} on:click={() => dispatch('shuffleClicked')} />
+	<IconButton icon="shuffle" highlight={shuffle} on:click={() => (shuffle = !shuffle)} />
 </div>
 
 <script lang="ts">
@@ -25,7 +25,6 @@
 
 	const dispatch = createEventDispatcher<{
 		playPauseClicked: void
-		shuffleClicked: void
 		nextClicked: void
 		previousClicked: void
 	}>()

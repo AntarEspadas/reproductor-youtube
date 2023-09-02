@@ -1,10 +1,11 @@
-<PlaylistItemsComponent {playlistItems} {loopMode} />
+<PlaylistItemsComponent {playlistItems} {loopMode} {shuffle} />
 <Controls
 	playing={[1, 3].includes($playerState)}
 	bind:loop={loopMode}
+	bind:shuffle
 	on:playPauseClicked={handlePlayPause}
-	on:nextClicked={() => ($selectedTrack += 1)}
-	on:previousClicked={() => ($selectedTrack -= 1)}
+	on:nextClicked={handleNext}
+	on:previousClicked={handlePrevious}
 />
 
 <script lang="ts">
@@ -13,10 +14,12 @@
 	import type { PlaylistItems } from '$lib/youtube/types'
 	import { playerState, selectedTrack } from '$lib/stores'
 	import type { LoopMode } from './types'
+	import { getRandomIndex } from '$lib/util'
 
 	export let playlistItems: PlaylistItems
 
 	let loopMode: LoopMode = 'none'
+	let shuffle = false
 
 	function handlePlayPause() {
 		if ([1, 3].includes($playerState)) {
@@ -24,5 +27,14 @@
 		} else {
 			$playerState = 1
 		}
+	}
+
+	function handleNext() {
+		if (!shuffle) $selectedTrack += 1
+		else $selectedTrack = getRandomIndex(playlistItems.items.length, $selectedTrack)
+	}
+
+	function handlePrevious() {
+		$selectedTrack -= 1
 	}
 </script>
