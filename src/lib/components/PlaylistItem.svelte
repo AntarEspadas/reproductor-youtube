@@ -17,6 +17,11 @@
 				on:stateChange={handleStateChange}
 			/>
 		{/if}
+		{#if !selected}
+			<div class="overlay">
+				<span class="material-symbols-outlined"> play_arrow </span>
+			</div>
+		{/if}
 	</div>
 </div>
 
@@ -77,7 +82,7 @@
 	function getScale(index: number, scroll: number) {
 		const distance = index * (width + margin) - scroll
 		let scale = 1.2 - Math.abs(distance) / width
-		scale = Math.max(scale, 0.25)
+		scale = Math.max(scale, 0.35)
 		return scale
 	}
 	function handleClick() {
@@ -105,16 +110,39 @@
 		.image
 			width: var(--width)
 			aspect-ratio: 16/9
-			background-color: red
 			background-position: center
 			background-size: cover
 			display: flex
 			align-items: center
 			justify-content: center
 
+	.playlist-item:hover
+		cursor: pointer
+
 	.playlist-item:first-of-type
 		margin-left: var(--padding)
 
 	.playlist-item:last-of-type
 		margin-right: var(--padding)
+
+	.overlay
+		position: absolute
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		display: flex
+		align-items: center
+		justify-content: center
+		background-color: rgba(0, 0, 0)
+		opacity: 0.5
+		transition: opacity 0.2s ease-in-out
+		color: white
+
+		span
+			font-size: 7rem
+
+	.playlist-item:not(:hover) .overlay
+		opacity: 0
+		transition: opacity 0.5s ease-in-out
 </style>
