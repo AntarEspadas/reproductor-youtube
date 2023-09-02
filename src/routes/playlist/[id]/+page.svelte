@@ -3,6 +3,7 @@
 {:then [playlistItems, playlistInfo]}
 	<TitleBar title={playlistInfo.snippet.title} />
 	<PlaylistItemsComponent {playlistItems} bind:selectedId />
+	<Controls />
 {:catch error}
 	<p>{error.message}</p>
 {/await}
@@ -11,6 +12,7 @@
 	import type { PageData } from './$types'
 	import PlaylistItemsComponent from '$lib/components/PlaylistItems.svelte'
 	import TitleBar from '$lib/components/TitleBar.svelte'
+	import Controls from '$lib/components/Controls.svelte'
 	import type { Item, PlaylistItems } from '$lib/youtube/types'
 
 	export let data: PageData
