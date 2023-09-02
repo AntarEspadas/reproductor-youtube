@@ -18,9 +18,10 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
 	import IconButton from './IconButton.svelte'
+	import type { LoopMode } from './youtube/types'
 
 	export let playing: boolean = true
-	export let loop: 'none' | 'one' | 'all' = 'none'
+	export let loop: LoopMode = 'none'
 	export let shuffle: boolean = false
 
 	$: playPauseIcon = playing ? 'pause' : 'play_arrow'
