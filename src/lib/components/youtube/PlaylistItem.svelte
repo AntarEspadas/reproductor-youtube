@@ -57,7 +57,7 @@
 	}
 
 	const dispatch = createEventDispatcher<{
-		click: { item: Item; scroll: number }
+		click: { item: Item; scroll: number; index: number }
 	}>()
 
 	onMount(() => {
@@ -79,7 +79,7 @@
 	}
 	function handleClick() {
 		const scroll = getScroll()
-		dispatch('click', { item, scroll })
+		dispatch('click', { item, scroll, index })
 	}
 
 	function getScroll() {

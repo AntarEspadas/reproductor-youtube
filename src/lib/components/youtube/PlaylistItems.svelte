@@ -15,7 +15,7 @@
 			{item}
 			{margin}
 			{width}
-			selected={item.id === selectedId}
+			selected={i === selectedIndex}
 			parentWidth={clientWidth}
 			on:click={handleItemClick}
 		/>
@@ -26,9 +26,9 @@
 	import PlaylistItemComponent from './PlaylistItem.svelte'
 	import type { PlaylistItems, Item } from '$lib/youtube/types'
 	import { onMount, tick } from 'svelte'
+	import { selectedTrack, playerState } from '$lib/stores'
 
 	export let playlistItems: PlaylistItems
-	export let selectedId: string
 
 	let scroll = 0
 	let clientWidth = 0
@@ -38,6 +38,16 @@
 	$: width = getWidth(windowWidth)
 	$: padding = clientWidth / 2 - 225
 	$: margin = windowWidth / 2 - width * 1.25
+	$: selectedIndex = 0
+
+	$: if ($selectedTrack !== selectedIndex) {
+		const scroll = $selectedTrack * (width + margin)
+		selectItem($selectedTrack, scroll)
+	}
+
+	$: if ($playerState === 0) {
+		$selectedTrack += 1
+	}
 
 	function getWidth(windowWidth: number) {
 		if (windowWidth < 600) return 180
@@ -47,21 +57,19 @@
 		return 600
 	}
 
-	async function selectItem(id: string, scroll: number) {
-		selectedId = id
-		selectedId = ''
+	async function selectItem(index: number, scroll: number) {
+		selectedIndex = -1
 		// Esperar a que se apliquen los cambios
 		await tick()
 		div?.scrollTo({ left: scroll, behavior: 'smooth' })
 		// Esperar a que termine da hacerse scroll antes de actualizar el DOM
 		setTimeout(() => {
-			selectedId = id
+			selectedIndex = index
 		}, 75)
 	}
 
-	async function handleItemClick(e: CustomEvent<{ item: Item; scroll: number }>) {
-		const scroll = e.detail.scroll
-		selectItem(e.detail.item.id, scroll)
+	async function handleItemClick(e: CustomEvent<{ index: number }>) {
+		$selectedTrack = e.detail.index
 	}
 
 	function handleScroll(e: Event) {
@@ -70,12 +78,12 @@
 
 	function handleMouseUp() {
 		// Esperar a que termine da hacerse scroll antes de actualizar el DOM
-		const idInicial = selectedId
+		const initialIndex = selectedIndex
 		setTimeout(() => {
 			// Si se seleccionó otro item mientras se hacía scroll, no hacer nada
-			if (idInicial !== selectedId) return
-			const selectedIndex = Math.round(scroll / (width + margin))
-			selectedId = playlistItems.items[selectedIndex].id
+			if (initialIndex !== selectedIndex) return
+			selectedIndex = Math.round(scroll / (width + margin))
+			$selectedTrack = selectedIndex
 		}, 225)
 	}
 
