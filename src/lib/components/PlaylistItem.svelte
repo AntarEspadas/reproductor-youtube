@@ -147,13 +147,13 @@
 		.title
 			position: absolute
 			margin: 0px
-			bottom: -25px
+			top: -25px
 			left: 0
 			color: black
 			font-size: 3rem
 			text-align: center
 			width: 100%
-			transform: translateY(100%)
+			transform: translateY(-100%)
 			transition-property: transform, opacity
 			transition-duration: 0.4s
 			transition-timing-function: ease-in-out
