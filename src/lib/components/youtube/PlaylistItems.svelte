@@ -18,7 +18,6 @@
 			selected={item.id === selectedId}
 			parentWidth={clientWidth}
 			on:click={handleItemClick}
-			on:stateChange={handleStateChange}
 		/>
 	{/each}
 </div>
@@ -80,16 +79,16 @@
 		}, 225)
 	}
 
-	function handleStateChange(e: {
-		detail: { index: number; videoId: string; state: YT.PlayerState; scroll: number }
-	}) {
-		if (e.detail.state !== YT.PlayerState.ENDED) return
-		const index = e.detail.index
-		const nextId = playlistItems.items[index + 1]?.id
-		if (!nextId) return
-		const scroll = e.detail.scroll + width + margin
-		selectItem(nextId, scroll)
-	}
+	// function handleStateChange(e: {
+	// 	detail: { index: number; videoId: string; state: YT.PlayerState; scroll: number }
+	// }) {
+	// 	if (e.detail.state !== YT.PlayerState.ENDED) return
+	// 	const index = e.detail.index
+	// 	const nextId = playlistItems.items[index + 1]?.id
+	// 	if (!nextId) return
+	// 	const scroll = e.detail.scroll + width + margin
+	// 	selectItem(nextId, scroll)
+	// }
 
 	onMount(() => {
 		window.addEventListener('resize', () => {

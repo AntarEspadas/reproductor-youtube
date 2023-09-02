@@ -9,11 +9,7 @@
 	bind:this={div}
 >
 	{#if iframeVisible}
-		<YoutubePlayer
-			videoId={item.snippet.resourceId.videoId}
-			{index}
-			on:stateChange={handleStateChange}
-		/>
+		<YoutubePlayer videoId={item.snippet.resourceId.videoId} {index} />
 	{:else}
 		<div class="overlay border-radius">
 			<span class="material-symbols-outlined"> play_arrow </span>
@@ -62,7 +58,6 @@
 
 	const dispatch = createEventDispatcher<{
 		click: { item: Item; scroll: number }
-		stateChange: { index: number; videoId: string; state: YT.PlayerState; scroll: number }
 	}>()
 
 	onMount(() => {
@@ -85,12 +80,6 @@
 	function handleClick() {
 		const scroll = getScroll()
 		dispatch('click', { item, scroll })
-	}
-
-	function handleStateChange(
-		e: CustomEvent<{ index: number; state: YT.PlayerState; videoId: string }>
-	) {
-		dispatch('stateChange', { ...e.detail, scroll: getScroll() })
 	}
 
 	function getScroll() {

@@ -3,14 +3,11 @@
 </div>
 
 <script lang="ts">
-	import { createEventDispatcher, onMount } from 'svelte'
+	import { onMount } from 'svelte'
+	import { playerState } from '$lib/stores'
 
 	export let videoId: string
 	export let index: number
-
-	const dispatch = createEventDispatcher<{
-		stateChange: { index: number; videoId: string; state: YT.PlayerState }
-	}>()
 
 	let visible = false
 
@@ -34,27 +31,35 @@
 			},
 			events: {
 				onReady: onPlayerReady,
-				onStateChange: onPlayerStateChange
+				onStateChange: (e) => {
+					$playerState = e.data
+					if (e.data === 1) visible = true
+				}
+			}
+		})
+
+		const unsubscribe = playerState.subscribe((playerState) => {
+			if (playerState === player.getPlayerState?.()) return
+			if (playerState === 1) {
+				player.playVideo?.()
+			} else if (playerState === 2) {
+				player.pauseVideo?.()
 			}
 		})
 
 		return () => {
 			player.destroy()
-		}
-
-		function onPlayerReady() {
-			// Idealmente, el video se pondrá en visible cuando empiece a reproducirse
-			// pero si no se reproduce, se pondrá visible después de 2 segundos
-			setTimeout(() => {
-				visible = true
-			}, 2000)
-		}
-
-		function onPlayerStateChange(e: YT.OnStateChangeEvent) {
-			if (e.data === 1) visible = true
-			dispatch('stateChange', { index, videoId, state: e.data })
+			unsubscribe()
 		}
 	})
+
+	function onPlayerReady() {
+		// Idealmente, el video se pondrá en visible cuando empiece a reproducirse
+		// pero si no se reproduce, se pondrá visible después de 2 segundos
+		setTimeout(() => {
+			visible = true
+		}, 2000)
+	}
 </script>
 
 <style lang="sass">
