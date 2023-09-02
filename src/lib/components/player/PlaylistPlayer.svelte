@@ -9,7 +9,7 @@
 />
 
 <script lang="ts">
-	import Controls from '$lib/components/Controls.svelte'
+	import Controls from './Controls.svelte'
 	import PlaylistItemsComponent from './PlaylistItems.svelte'
 	import type { PlaylistItems } from '$lib/youtube/types'
 	import { playerState, selectedTrack } from '$lib/stores'

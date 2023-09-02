@@ -13,8 +13,8 @@
 
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
-	import IconButton from './IconButton.svelte'
-	import type { LoopMode } from './youtube/types'
+	import IconButton from '../IconButton.svelte'
+	import type { LoopMode } from './types'
 
 	export let playing: boolean = true
 	export let loop: LoopMode = 'none'

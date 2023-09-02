@@ -12,7 +12,7 @@
 <script lang="ts">
 	import type { PageData } from './$types'
 	import TitleBar from '$lib/components/TitleBar.svelte'
-	import PlaylistPlayer from '$lib/components/youtube/PlaylistPlayer.svelte'
+	import PlaylistPlayer from '$lib/components/player/PlaylistPlayer.svelte'
 	import type { Item, PlaylistItems } from '$lib/youtube/types'
 	import { onMount } from 'svelte'
 
