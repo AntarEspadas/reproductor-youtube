@@ -1,3 +1,4 @@
+<SearchBar bind:query on:search={() => goto(`/?q=${encodeURIComponent(query)}`)} />
 {#if promise}
 	{#await promise}
 		<p>loading...</p>
@@ -13,23 +14,28 @@
 	import type { PageData } from './$types'
 	import TitleBar from '$lib/components/TitleBar.svelte'
 	import PlaylistPlayer from '$lib/components/player/PlaylistPlayer.svelte'
+	import SearchBar from '$lib/components/search/SearchBar.svelte'
 	import type { Item, PlaylistItems } from '$lib/youtube/types'
 	import { onMount } from 'svelte'
+	import { goto } from '$app/navigation'
 
 	export let data: PageData
-	$: youtubeApi = data.youtubeApi
 
+	let query: string = ''
 	let promise: Promise<[PlaylistItems, Item]>
+	let mounted = false
+
+	$: youtubeApi = data.youtubeApi
+	$: if (data.playlistId !== '' && mounted) {
+		promise = getPlaylistItems(data.playlistId)
+	}
 
 	onMount(() => {
-		promise = getPlaylistItems()
+		mounted = true
 	})
 
-	async function getPlaylistItems(): Promise<[PlaylistItems, Item]> {
-		const promises = [
-			youtubeApi.playlistItems(data.playlistId),
-			youtubeApi.playlistInfo(data.playlistId)
-		]
+	async function getPlaylistItems(playlistId: string): Promise<[PlaylistItems, Item]> {
+		const promises = [youtubeApi.playlistItems(playlistId), youtubeApi.playlistInfo(playlistId)]
 		const [items, info] = await Promise.all(promises)
 		return [items, info.items[0]]
 	}
