@@ -1,0 +1,13 @@
+/* Write your global styles here, in SCSS syntax. Variables and mixins from the src/variables.scss file are available here without importing */
+
+@import "./lib/styles/breakpoints"
+
+html
+    @include xs
+        font-size: 8px
+    @include sm
+        font-size: 10px
+    @include md
+        font-size: 13px
+    @include lg
+        font-size: unset

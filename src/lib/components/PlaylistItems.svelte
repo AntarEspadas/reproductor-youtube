@@ -99,12 +99,23 @@
 </script>
 
 <style lang="sass">
+
+    @import "$lib/styles/breakpoints"
+
     .playlist-items
         width: 100%
-        height: 500px
         display: flex
         align-items: center
         overflow-x: scroll
         overflow-y: hidden
         scroll-snap-type: x mandatory
+
+        @include xs
+            height: 200px
+        @include sm
+            height: 300px
+        @include md
+            height: 400px
+        @include lg
+            height: 500px
 </style>
