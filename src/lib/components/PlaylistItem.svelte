@@ -101,6 +101,7 @@
 <style lang="sass">
 	.playlist-item
 		scroll-snap-align: center
+		scroll-snap-stop: always
 		margin-right: var(--margin)
 		animation: shrink 0.2s ease-in-out
 		scale: var(--scale)
