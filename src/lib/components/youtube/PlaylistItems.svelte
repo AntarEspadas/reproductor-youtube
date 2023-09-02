@@ -42,6 +42,16 @@
 	$: margin = windowWidth / 2 - width * 1.25
 	$: selectedIndex = 0
 
+	$: {
+		// ESto está aquí para que el bloque se ejecute
+		//cada vez que cambie el valor de playlistItems
+		playlistItems
+		// Debido a la propiedad scroll-snap, por alguna razón
+		// a veces la lista empieza con el segundo video seleccionado.
+		// Esto parece solucionarlo
+		div?.scrollTo({ left: 0, behavior: 'instant' })
+	}
+
 	$: if ($selectedTrack !== selectedIndex) {
 		const scroll = $selectedTrack * (width + margin)
 		selectItem($selectedTrack, scroll)
