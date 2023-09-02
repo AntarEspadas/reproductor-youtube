@@ -115,6 +115,7 @@
 		justify-content: center
 		background-image: var(--url)
 		border-radius: 20px
+		-webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(0,0,0,0.0) 0%, rgba(0, 0, 0, 0.2) 75%, rgba(0,0,0,0.4) 100%)
 
 	.playlist-item:hover
 		cursor: pointer
