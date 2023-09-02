@@ -26,6 +26,10 @@
 	})
 
 	async function search(query: string) {
+		if (query === '') {
+			searchResults = null
+			return
+		}
 		searchResults = await youtubeApi.searchPlaylists(query)
 		const playlistInfo = await youtubeApi.playlistInfo(query)
 		if (playlistInfo.items?.at(0)?.id !== undefined) {
