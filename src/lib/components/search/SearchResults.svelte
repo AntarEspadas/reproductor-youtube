@@ -1,7 +1,4 @@
 <ul>
-	{#if playlistItem}
-		<SearchResultItem id={playlistItem.id} snippet={playlistItem.snippet} />
-	{/if}
 	{#if searchResults?.items}
 		{#each searchResults.items as { id, snippet } (id)}
 			<SearchResultItem id={id.playlistId} {snippet} />
@@ -14,5 +11,4 @@
 	import SearchResultItem from './SearchResultItem.svelte'
 
 	export let searchResults: PlaylistSearchResult | null
-	export let playlistItem: Item | null
 </script>

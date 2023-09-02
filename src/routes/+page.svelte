@@ -1,6 +1,6 @@
 <div class="main">
 	<SearchBar bind:query on:search={handleSearch} />
-	<SearchResults {searchResults} {playlistItem} />
+	<SearchResults {searchResults} />
 </div>
 
 <script lang="ts">
@@ -15,7 +15,6 @@
 
 	let query = data.query
 	let searchResults: PlaylistSearchResult | null = null
-	let playlistItem: Item | null = null
 
 	$: youtubeApi = data.youtubeApi
 
