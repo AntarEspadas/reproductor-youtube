@@ -24,7 +24,7 @@
 </div>
 
 <script lang="ts">
-	import PlaylistItemComponent from '$lib/components/PlaylistItem.svelte'
+	import PlaylistItemComponent from './PlaylistItem.svelte'
 	import type { PlaylistItems, Item } from '$lib/youtube/types'
 	import { onMount, tick } from 'svelte'
 

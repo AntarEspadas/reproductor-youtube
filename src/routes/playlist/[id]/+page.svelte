@@ -10,7 +10,7 @@
 
 <script lang="ts">
 	import type { PageData } from './$types'
-	import PlaylistItemsComponent from '$lib/components/PlaylistItems.svelte'
+	import PlaylistItemsComponent from '$lib/components/youtube/PlaylistItems.svelte'
 	import TitleBar from '$lib/components/TitleBar.svelte'
 	import Controls from '$lib/components/Controls.svelte'
 	import type { Item, PlaylistItems } from '$lib/youtube/types'
