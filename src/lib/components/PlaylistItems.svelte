@@ -45,7 +45,9 @@
 		await tick()
 		div?.scrollTo({ left: scroll, behavior: 'smooth' })
 		// Esperar a que termine da hacerse scroll antes de actualizar el DOM
-		selectedId = id
+		setTimeout(() => {
+			selectedId = id
+		}, 75)
 	}
 
 	async function handleItemClick(e: CustomEvent<{ item: PlaylistItem; scroll: number }>) {

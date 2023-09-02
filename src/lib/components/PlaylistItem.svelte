@@ -14,8 +14,7 @@
 			{index}
 			on:stateChange={handleStateChange}
 		/>
-	{/if}
-	{#if !selected}
+	{:else}
 		<div class="overlay border-radius">
 			<span class="material-symbols-outlined"> play_arrow </span>
 			<p class="title">{item.snippet.title}</p>
@@ -141,7 +140,9 @@
 
 		span
 			font-size: 7rem
-			transition: opacity 0.2s ease-in-out
+			color: rgba(255, 255, 255, 1)
+			color: white
+			transition: color 0.2s ease-in-out
 
 		.title
 			position: absolute
@@ -163,8 +164,8 @@
 			transition: background-color 0.5s ease-in-out
 			
 			span
-				opacity: 0
-				transition: opacity 0.5s ease-in-out
+				color: rgba(255, 255, 255, 0)
+				transition: color 0.5s ease-in-out
 
 			.title
 				opacity: 0
