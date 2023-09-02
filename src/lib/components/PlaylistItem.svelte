@@ -18,6 +18,7 @@
 	{#if !selected}
 		<div class="overlay border-radius">
 			<span class="material-symbols-outlined"> play_arrow </span>
+			<p class="title">{item.snippet.title}</p>
 		</div>
 	{/if}
 </div>
@@ -134,17 +135,41 @@
 		display: flex
 		align-items: center
 		justify-content: center
-		background-color: rgba(0, 0, 0)
-		opacity: 0.5
-		transition: opacity 0.2s ease-in-out
+		background-color: rgba(0, 0, 0, 0.5)
+		transition: background-color 0.2s ease-in-out
 		color: white
 
 		span
 			font-size: 7rem
+			transition: opacity 0.2s ease-in-out
 
-	.playlist-item:not(:hover) .overlay
-		opacity: 0
-		transition: opacity 0.5s ease-in-out
+		.title
+			position: absolute
+			margin: 0px
+			bottom: -25px
+			left: 0
+			color: black
+			font-size: 3rem
+			text-align: center
+			width: 100%
+			transform: translateY(100%)
+			transition-property: transform, opacity
+			transition-duration: 0.4s
+			transition-timing-function: ease-in-out
+
+	.playlist-item:not(:hover)
+		.overlay
+			background-color: rgba(0, 0, 0, 0)
+			transition: background-color 0.5s ease-in-out
+			
+			span
+				opacity: 0
+				transition: opacity 0.5s ease-in-out
+
+			.title
+				opacity: 0
+				transform: translateY(0)
+				transition-duration: 0.5s
 
 	.playlist-item :global(.border-radius)
 		border-radius: 20px

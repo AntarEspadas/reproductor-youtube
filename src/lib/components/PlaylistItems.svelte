@@ -93,5 +93,6 @@
         display: flex
         align-items: center
         overflow-x: scroll
+        overflow-y: hidden
         scroll-snap-type: x mandatory
 </style>
