@@ -6,10 +6,10 @@ export interface PlaylistItems {
 	pageInfo: PageInfo
 }
 
-export interface Item {
+export interface Item<Tid = string> {
 	kind: string
 	etag: string
-	id: string
+	id: Tid
 	snippet: Snippet
 }
 
@@ -36,8 +36,8 @@ export interface Thumbnails {
 	default: Thumbnail
 	medium: Thumbnail
 	high: Thumbnail
-	standard: Thumbnail
-	maxres: Thumbnail
+	standard?: Thumbnail
+	maxres?: Thumbnail
 }
 
 export interface Thumbnail {
@@ -71,4 +71,18 @@ export interface Snippet {
 export interface Localized {
 	title: string
 	description: string
+}
+
+export interface PlaylistSearchResult {
+	kind: string
+	etag: string
+	nextPageToken: string
+	regionCode: string
+	pageInfo: PageInfo
+	items: Item<PlaylistID>[]
+}
+
+export interface PlaylistID {
+	kind: string
+	playlistId: string
 }

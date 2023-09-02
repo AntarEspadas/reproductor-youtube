@@ -6,3 +6,12 @@ export function getRandomIndex(length: number, currentIndex: number): number {
 	} while (index === currentIndex)
 	return index
 }
+
+// https://www.geeksforgeeks.org/implement-search-box-with-debounce-in-javascript/
+export function debounce<T extends unknown[]>(fn: (...args: T) => void, delay: number) {
+	let timerId: number | undefined = undefined
+	return (...args: T) => {
+		clearTimeout(timerId)
+		timerId = setTimeout(() => fn(...args), delay)
+	}
+}
