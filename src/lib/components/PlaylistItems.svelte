@@ -4,6 +4,8 @@
 	bind:clientWidth
 	on:scroll={handleScroll}
 	on:mouseup={handleMouseUp}
+	on:dragend={handleMouseUp}
+	on:touchend={handleMouseUp}
 	class="playlist-items"
 	style="--padding: {padding}px"
 >
@@ -34,9 +36,17 @@
 	let windowWidth = window?.innerWidth ?? 0
 	let div: HTMLDivElement | null = null
 
-	const width = 600
+	$: width = getWidth(windowWidth)
 	$: padding = clientWidth / 2 - 225
-	$: margin = windowWidth / 2 - 750
+	$: margin = windowWidth / 2 - width * 1.25
+
+	function getWidth(windowWidth: number) {
+		if (windowWidth < 600) return 180
+		if (windowWidth < 900) return 280
+		if (windowWidth < 1200) return 425
+		if (windowWidth < 1536) return 550
+		return 600
+	}
 
 	async function selectItem(id: string, scroll: number) {
 		selectedId = id
