@@ -23,7 +23,7 @@
 
 <script lang="ts">
 	import PlaylistItemComponent from '$lib/components/PlaylistItem.svelte'
-	import type { PlaylistItems, PlaylistItem } from '$lib/youtube/types'
+	import type { PlaylistItems, Item } from '$lib/youtube/types'
 	import { onMount, tick } from 'svelte'
 
 	export let playlistItems: PlaylistItems
@@ -50,7 +50,7 @@
 		}, 75)
 	}
 
-	async function handleItemClick(e: CustomEvent<{ item: PlaylistItem; scroll: number }>) {
+	async function handleItemClick(e: CustomEvent<{ item: Item; scroll: number }>) {
 		const scroll = e.detail.scroll
 		selectItem(e.detail.item.id, scroll)
 	}

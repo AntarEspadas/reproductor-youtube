@@ -10,4 +10,12 @@ export class YoutubeApi {
 		)
 		return (await response.json()) as PlaylistItems
 	}
+
+	public async playlistInfo(playlistId: string) {
+		const part = 'snippet'
+		const response = await fetch(
+			`https://www.googleapis.com/youtube/v3/playlists?key=${this.apiKey}&part=${part}&id=${playlistId}`
+		)
+		return (await response.json()) as PlaylistItems
+	}
 }

@@ -2,11 +2,11 @@ export interface PlaylistItems {
 	kind: string
 	etag: string
 	nextPageToken: string
-	items: PlaylistItem[]
+	items: Item[]
 	pageInfo: PageInfo
 }
 
-export interface PlaylistItem {
+export interface Item {
 	kind: string
 	etag: string
 	id: string
@@ -49,4 +49,26 @@ export interface Thumbnail {
 export interface PageInfo {
 	totalResults: number
 	resultsPerPage: number
+}
+
+export interface PlaylistInfo {
+	kind: string
+	etag: string
+	pageInfo: PageInfo
+	items: Item[]
+}
+
+export interface Snippet {
+	publishedAt: Date
+	channelId: string
+	title: string
+	description: string
+	thumbnails: Thumbnails
+	channelTitle: string
+	localized: Localized
+}
+
+export interface Localized {
+	title: string
+	description: string
 }

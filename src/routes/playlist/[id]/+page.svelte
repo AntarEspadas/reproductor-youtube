@@ -1,23 +1,30 @@
 {#await getPlaylistItems()}
 	<p>loading...</p>
-{:then playlistItems}
-	<PlaylistItems {playlistItems} bind:selectedId />
+{:then [playlistItems, playlistInfo]}
+	<TitleBar title={playlistInfo.snippet.title} />
+	<PlaylistItemsComponent {playlistItems} bind:selectedId />
 {:catch error}
 	<p>{error.message}</p>
 {/await}
 
 <script lang="ts">
 	import type { PageData } from './$types'
-	import PlaylistItems from '$lib/components/PlaylistItems.svelte'
+	import PlaylistItemsComponent from '$lib/components/PlaylistItems.svelte'
+	import TitleBar from '$lib/components/TitleBar.svelte'
+	import type { Item, PlaylistItems } from '$lib/youtube/types'
 
 	export let data: PageData
 	$: youtubeApi = data.youtbeApi
 
 	let selectedId = ''
 
-	async function getPlaylistItems() {
-		const result = await youtubeApi.playlistItems(data.playlistId)
-		selectedId = result.items[0].id
-		return result
+	async function getPlaylistItems(): Promise<[PlaylistItems, Item]> {
+		const promises = [
+			youtubeApi.playlistItems(data.playlistId),
+			youtubeApi.playlistInfo(data.playlistId)
+		]
+		const [items, info] = await Promise.all(promises)
+		selectedId = items.items[0].id
+		return [items, info.items[0]]
 	}
 </script>

@@ -24,10 +24,10 @@
 
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte'
-	import type { PlaylistItem } from '$lib/youtube/types'
+	import type { Item } from '$lib/youtube/types'
 	import YoutubePlayer from './YoutubePlayer.svelte'
 
-	export let item: PlaylistItem
+	export let item: Item
 	export let selected: boolean
 	// export let scroll: number
 	export let index: number
@@ -61,7 +61,7 @@
 	}
 
 	const dispatch = createEventDispatcher<{
-		click: { item: PlaylistItem; scroll: number }
+		click: { item: Item; scroll: number }
 		stateChange: { index: number; videoId: string; state: YT.PlayerState; scroll: number }
 	}>()
 
