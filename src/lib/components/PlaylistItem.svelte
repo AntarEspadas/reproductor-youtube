@@ -1,6 +1,6 @@
 <div
 	style="--padding: {startEndMargin}px; --margin: {margin}px; --width: {width}px; --scale: {scale}; --url: url({url});"
-	class="playlist-item"
+	class="playlist-item border-radius"
 	class:selected
 	role="button"
 	tabindex={index}
@@ -16,7 +16,7 @@
 		/>
 	{/if}
 	{#if !selected}
-		<div class="overlay">
+		<div class="overlay border-radius">
 			<span class="material-symbols-outlined"> play_arrow </span>
 		</div>
 	{/if}
@@ -114,6 +114,7 @@
 		align-items: center
 		justify-content: center
 		background-image: var(--url)
+		border-radius: 20px
 
 	.playlist-item:hover
 		cursor: pointer
@@ -144,4 +145,7 @@
 	.playlist-item:not(:hover) .overlay
 		opacity: 0
 		transition: opacity 0.5s ease-in-out
+
+	.playlist-item :global(.border-radius)
+		border-radius: 20px
 </style>

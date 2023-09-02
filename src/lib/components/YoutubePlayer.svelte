@@ -1,5 +1,5 @@
-<div class="youtube-player" class:visible>
-	<div {id} />
+<div class="youtube-player border-radius" class:visible>
+	<div {id} class="border-radius" />
 </div>
 
 <script lang="ts">
