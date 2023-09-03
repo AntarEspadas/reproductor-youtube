@@ -28,14 +28,21 @@
 		margin: 2rem 0
 
 	.container 
+		position: relative
 		display: grid
-		grid-template-columns: 1fr 40px
+		grid-template-columns: 1fr
 		gap: 0.5rem
 
 		@include xs
 			width: 100%
 		@include sm
 			width: 400px
+
+		:global(.icon-button)
+			position: absolute
+			right: 0
+			top: 50%
+			transform: translateX(100%) translateY(-50%)
 
 	input
 		padding: 0.5rem

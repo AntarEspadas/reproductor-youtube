@@ -1,4 +1,4 @@
-<button class:highlight {type} on:click aria-label={label}>
+<button class="icon-button" class:highlight {type} on:click aria-label={label}>
 	<span class="material-symbols-{variant}" style="--icon-size: {iconSize}">
 		{icon}
 	</span>
