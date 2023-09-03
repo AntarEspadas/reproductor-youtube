@@ -1,4 +1,4 @@
-<form on:submit|preventDefault={(e) => dispatch('search')}>
+<form on:submit|preventDefault={(e) => dispatch('search', { query: encodeURIComponent(query) })}>
 	<div class="container">
 		<input type="search" id="search" bind:value={query} />
 		<IconButton type="submit" label="buscar" icon="search" iconSize="2rem" />
@@ -12,7 +12,7 @@
 	export let query = ''
 
 	const dispatch = createEventDispatcher<{
-		search: void
+		search: { query: string }
 	}>()
 </script>
 

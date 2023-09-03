@@ -1,4 +1,4 @@
-<SearchBar bind:query on:search={() => goto(`/?q=${encodeURIComponent(query)}`)} />
+<SearchBar on:search={(e) => goto(`/?q=${e.detail.query}`)} />
 {#if promise}
 	{#await promise}
 		<p>loading...</p>
@@ -21,7 +21,6 @@
 
 	export let data: PageData
 
-	let query: string = ''
 	let promise: Promise<[PlaylistItems, Item]>
 	let mounted = false
 

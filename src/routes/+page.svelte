@@ -1,5 +1,5 @@
 <div class="main">
-	<SearchBar bind:query on:search={handleSearch} />
+	<SearchBar query={decodeURIComponent(data.query)} on:search={handleSearch} />
 	<SearchResults {searchResults} />
 </div>
 
@@ -13,15 +13,16 @@
 
 	export let data: PageData
 
-	let query = data.query
 	let searchResults: PlaylistSearchResult | null = null
+	let mounted = false
 
 	$: youtubeApi = data.youtubeApi
+	$: if (mounted) {
+		search(data.query)
+	}
 
 	onMount(() => {
-		if (query !== '') {
-			search(query)
-		}
+		mounted = true
 	})
 
 	async function search(query: string) {
@@ -36,8 +37,7 @@
 		}
 	}
 
-	async function handleSearch() {
-		goto(`/?q=${query}`)
-		search(query)
+	async function handleSearch(e: CustomEvent<{ query: string }>) {
+		goto(`/?q=${e.detail.query}`)
 	}
 </script>
