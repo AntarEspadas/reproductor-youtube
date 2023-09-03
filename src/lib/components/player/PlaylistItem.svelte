@@ -108,7 +108,8 @@
 		-webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(0,0,0,0.0) 0%, rgba(0, 0, 0, 0.2) 75%, rgba(0,0,0,0.4) 100%)
 
 	.playlist-item:hover
-		cursor: pointer
+		@media (hover: hover)
+			cursor: pointer
 
 	.playlist-item:first-of-type
 		margin-left: var(--padding)
@@ -129,11 +130,17 @@
 		transition: background-color 0.2s ease-in-out
 		color: white
 
+		@media (hover: none)
+			display: none
+
 		span
 			font-size: 7rem
 			color: rgba(255, 255, 255, 1)
 			color: white
 			transition: color 0.2s ease-in-out
+
+			@media (hover: none)
+				display: none
 
 		.title
 			position: absolute
@@ -148,6 +155,8 @@
 			transition-property: transform, opacity
 			transition-duration: 0.4s
 			transition-timing-function: ease-in-out
+			@media (hover: none)
+				display: none
 
 	.playlist-item:not(:hover)
 		.overlay

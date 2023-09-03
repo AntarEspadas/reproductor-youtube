@@ -30,7 +30,8 @@ button
         background-color: rgba(0, 0, 0, 0.3)
 
     &:hover
-        background-color: rgba(0, 0, 0, 0.4)
+        @media (hover: hover)
+            background-color: rgba(0, 0, 0, 0.4)
     &:active
         background-color: rgba(0, 0, 0, 0.5)
 

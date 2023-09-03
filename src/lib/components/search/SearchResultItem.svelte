@@ -65,8 +65,8 @@
 		box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.2)
 		transition: transform 0.3s ease-in-out
 
-		@include md
-			&:hover
+		&:hover
+			@media (hover: hover)
 				transform: translateX(5%)
 
 	.search-result-item
