@@ -52,6 +52,9 @@
 		// a veces la lista empieza con el segundo video seleccionado.
 		// Esto parece solucionarlo
 		div?.scrollTo({ left: 0, behavior: 'instant' })
+
+		// Si se cambia la playlist, resetear el estado
+		$selectedTrack = 0
 	}
 
 	$: if ($selectedTrack !== selectedIndex) {
