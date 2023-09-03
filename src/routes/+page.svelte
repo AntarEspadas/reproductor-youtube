@@ -14,6 +14,10 @@
 				Se produjo un error
 			{/await}
 		</div>
+	{:else if mounted}
+		<h1 in:fade={{ delay: 200, duration: 500 }} out:fade={{ duration: 100 }} class="texto-ayuda">
+			Haga una búsqueda o introduzca el ID de una playlist
+		</h1>
 	{/if}
 </div>
 
@@ -22,6 +26,7 @@
 	import SearchBar from '$lib/components/search/SearchBar.svelte'
 	import SearchResults from '$lib/components/search/SearchResults.svelte'
 	import type { Item, PlaylistSearchResult } from '$lib/youtube/types'
+	import { fade } from 'svelte/transition'
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
 
@@ -78,4 +83,12 @@
 
 	.results
 		margin-top: 7rem
+
+	.texto-ayuda
+		text-align: center
+		margin-top: 7rem
+		font-weight: 300
+		letter-spacing: 0.1rem
+		line-height: 1.5
+		transition: opacity 0.2s ease-in-out
 </style>
