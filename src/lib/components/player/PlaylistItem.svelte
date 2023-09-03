@@ -8,6 +8,9 @@
 	on:keypress={(e) => e.key === 'Enter' && handleClick()}
 	bind:this={div}
 >
+	<div class="title-overlay">
+		<h3>{item.snippet.title}</h3>
+	</div>
 	{#if iframeVisible}
 		<YoutubePlayer videoId={item.snippet.resourceId.videoId} {index} />
 	{:else}
@@ -174,4 +177,17 @@
 
 	.playlist-item :global(.border-radius)
 		border-radius: 20px
+
+	.title-overlay
+		opacity: calc(var(--scale) - 0.35)
+		position: absolute
+		bottom: 0
+		color: white
+		background-color: black
+		width: 100%
+		border-radius: 0 0 20px 20px
+		font-size: 1.4rem
+
+		h3
+			margin: 1rem
 </style>
