@@ -14,7 +14,7 @@
 	{#if iframeVisible}
 		<YoutubePlayer videoId={item.snippet.resourceId.videoId} {index} />
 	{:else}
-		<div class="overlay border-radius">
+		<div class="overlay border-radius" out:fade>
 			<span class="material-symbols-outlined"> play_arrow </span>
 			<p class="title">{item.snippet.title}</p>
 		</div>
@@ -22,6 +22,7 @@
 </div>
 
 <script lang="ts">
+	import { fade } from 'svelte/transition'
 	import { createEventDispatcher, onMount } from 'svelte'
 	import type { Item } from '$lib/youtube/types'
 	import YoutubePlayer from './YoutubePlayer.svelte'
@@ -150,7 +151,8 @@
 			margin: 0px
 			top: -25px
 			left: 0
-			color: black
+			// Esconder el título cuando se hace más grande
+			color: rgba(0, 0, 0, calc(1.2 - var(--scale)))
 			font-size: 3rem
 			text-align: center
 			width: 100%
