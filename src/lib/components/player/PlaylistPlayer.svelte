@@ -30,11 +30,16 @@
 	}
 
 	function handleNext() {
-		if (!shuffle) $selectedTrack += 1
-		else $selectedTrack = getRandomIndex(playlistItems.items.length, $selectedTrack)
+		if (shuffle) {
+			$selectedTrack = getRandomIndex(playlistItems.items.length, $selectedTrack)
+			return
+		}
+		if (loopMode === 'one') loopMode = 'none'
+		if ($selectedTrack < playlistItems.items.length - 1) $selectedTrack += 1
+		else if (loopMode === 'all') $selectedTrack = 0
 	}
 
 	function handlePrevious() {
-		$selectedTrack -= 1
+		if ($selectedTrack > 0) $selectedTrack -= 1
 	}
 </script>
