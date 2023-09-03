@@ -63,7 +63,7 @@
 
 <style lang="sass">
 	.search-container
-		position: fixed
+		position: absolute
 		top: 0
 		left: 50%
 		transition-property: top, transform
