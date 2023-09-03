@@ -1,6 +1,14 @@
 <div class="main">
 	<SearchBar query={decodeURIComponent(data.query)} on:search={handleSearch} />
-	<SearchResults {searchResults} />
+	{#if promise}
+		{#await promise}
+			<p>loading...</p>
+		{:then searchResults}
+			<SearchResults {searchResults} />
+		{:catch error}
+			Se produjo un error
+		{/await}
+	{/if}
 </div>
 
 <script lang="ts">
@@ -13,7 +21,7 @@
 
 	export let data: PageData
 
-	let searchResults: PlaylistSearchResult | null = null
+	let promise: Promise<PlaylistSearchResult> | null = null
 	let mounted = false
 
 	$: youtubeApi = data.youtubeApi
@@ -27,10 +35,10 @@
 
 	async function search(query: string) {
 		if (query === '') {
-			searchResults = null
+			promise = null
 			return
 		}
-		searchResults = await youtubeApi.searchPlaylists(query)
+		promise = youtubeApi.searchPlaylists(query)
 		const playlistInfo = await youtubeApi.playlistInfo(query)
 		if (playlistInfo.items?.at(0)?.id !== undefined) {
 			goto(`/playlist/${playlistInfo.items[0].id}`, { replaceState: true })
