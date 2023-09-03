@@ -1,4 +1,4 @@
-<button class:highlight on:click>
+<button class:highlight on:click aria-label={label}>
 	<span class="material-symbols-{variant}">
 		{icon}
 	</span>
@@ -8,6 +8,7 @@
 	export let icon: string
 	export let variant: 'outlined' | 'rounded' = 'rounded'
 	export let highlight: boolean = false
+	export let label: string
 </script>
 
 <style lang="sass">

@@ -1,14 +1,28 @@
 <div class="controls">
 	<!-- Botón repetir -->
-	<IconButton icon={loopIcon} highlight={loop !== 'none'} on:click={handleLoopClicked} />
+	<IconButton
+		label="bucle"
+		icon={loopIcon}
+		highlight={loop !== 'none'}
+		on:click={handleLoopClicked}
+	/>
 	<!-- Botón de regresar -->
-	<IconButton icon="skip_previous" on:click={() => dispatch('previousClicked')} />
+	<IconButton label="regresar" icon="skip_previous" on:click={() => dispatch('previousClicked')} />
 	<!-- Botón de play-pausa -->
-	<IconButton icon={playPauseIcon} on:click={() => dispatch('playPauseClicked')} />
+	<IconButton
+		label={playing ? 'pausar' : 'reanudar'}
+		icon={playPauseIcon}
+		on:click={() => dispatch('playPauseClicked')}
+	/>
 	<!-- Botón de saltar -->
-	<IconButton icon="skip_next" on:click={() => dispatch('nextClicked')} />
+	<IconButton label="saltar" icon="skip_next" on:click={() => dispatch('nextClicked')} />
 	<!-- Botón aleatorio -->
-	<IconButton icon="shuffle" highlight={shuffle} on:click={() => (shuffle = !shuffle)} />
+	<IconButton
+		label="aleatorio"
+		icon="shuffle"
+		highlight={shuffle}
+		on:click={() => (shuffle = !shuffle)}
+	/>
 </div>
 
 <script lang="ts">
