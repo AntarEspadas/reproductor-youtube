@@ -4,8 +4,8 @@
 			<SearchBar query={decodeURIComponent(data.query)} on:search={handleSearch} />
 		</div>
 	</div>
-	<div class="results">
-		{#if promise}
+	{#if promise}
+		<div class="results">
 			{#await promise}
 				<p>loading...</p>
 			{:then searchResults}
@@ -13,8 +13,8 @@
 			{:catch error}
 				Se produjo un error
 			{/await}
-		{/if}
-	</div>
+		</div>
+	{/if}
 </div>
 
 <script lang="ts">
