@@ -1,5 +1,5 @@
-<button class:highlight on:click aria-label={label}>
-	<span class="material-symbols-{variant}">
+<button class:highlight {type} on:click aria-label={label}>
+	<span class="material-symbols-{variant}" style="--icon-size: {iconSize}">
 		{icon}
 	</span>
 </button>
@@ -9,6 +9,8 @@
 	export let variant: 'outlined' | 'rounded' = 'rounded'
 	export let highlight: boolean = false
 	export let label: string
+	export let type: 'button' | 'submit' | 'reset' = 'button'
+	export let iconSize: string = '3rem'
 </script>
 
 <style lang="sass">
@@ -33,6 +35,6 @@ button
         background-color: rgba(0, 0, 0, 0.5)
 
     span
-        font-size: 3rem
+        font-size: var(--icon-size)
 
 </style>
