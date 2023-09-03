@@ -1,14 +1,20 @@
 <div class="main">
-	<SearchBar query={decodeURIComponent(data.query)} on:search={handleSearch} />
-	{#if promise}
-		{#await promise}
-			<p>loading...</p>
-		{:then searchResults}
-			<SearchResults {searchResults} />
-		{:catch error}
-			Se produjo un error
-		{/await}
-	{/if}
+	<div class="search-container" class:large={data.query === ''}>
+		<div class="search">
+			<SearchBar query={decodeURIComponent(data.query)} on:search={handleSearch} />
+		</div>
+	</div>
+	<div class="results">
+		{#if promise}
+			{#await promise}
+				<p>loading...</p>
+			{:then searchResults}
+				<SearchResults {searchResults} />
+			{:catch error}
+				Se produjo un error
+			{/await}
+		{/if}
+	</div>
 </div>
 
 <script lang="ts">
@@ -49,3 +55,27 @@
 		goto(`/?q=${e.detail.query}`)
 	}
 </script>
+
+<style lang="sass">
+	.search-container
+		position: fixed
+		top: 0
+		left: 50%
+		transition-property: top, transform
+		transition-duration: 0.4s
+		transition-timing-function: ease-in-out
+		transform: translateX(-50%)
+
+		.search
+			transition: transform 0.4s ease-in-out
+
+		&.large
+			top: 50%
+			transform: translate(-50%, -50%)
+
+			.search
+				transform: scale(1.5) translate(0, -50%)
+
+	.results
+		margin-top: 7rem
+</style>
