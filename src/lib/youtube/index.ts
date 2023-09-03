@@ -8,6 +8,9 @@ export class YoutubeApi {
 		const response = await fetch(
 			`https://www.googleapis.com/youtube/v3/playlistItems?key=${this.apiKey}&part=${part}&playlistId=${playlistId}&maxResults=${maxResults}`
 		)
+		if (!response.ok) {
+			throw await response.json()
+		}
 		return (await response.json()) as PlaylistItems
 	}
 
@@ -16,6 +19,9 @@ export class YoutubeApi {
 		const response = await fetch(
 			`https://www.googleapis.com/youtube/v3/playlists?key=${this.apiKey}&part=${part}&id=${playlistId}`
 		)
+		if (!response.ok) {
+			throw await response.json()
+		}
 		return (await response.json()) as PlaylistItems
 	}
 
@@ -26,6 +32,9 @@ export class YoutubeApi {
 		const response = await fetch(
 			`https://www.googleapis.com/youtube/v3/search?key=${this.apiKey}&part=${part}&q=${escapedQuery}&type=${type}&maxResults=${maxResults}`
 		)
+		if (!response.ok) {
+			throw await response.json()
+		}
 		return (await response.json()) as PlaylistSearchResult
 	}
 }
