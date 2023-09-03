@@ -1,7 +1,7 @@
 <ul>
 	{#if searchResults?.items}
-		{#each searchResults.items as { id, snippet } (id)}
-			<SearchResultItem id={id.playlistId} {snippet} />
+		{#each searchResults.items as { id, snippet }, index (id)}
+			<SearchResultItem id={id.playlistId} {snippet} {index} />
 		{/each}
 	{/if}
 </ul>
@@ -12,3 +12,8 @@
 
 	export let searchResults: PlaylistSearchResult | null
 </script>
+
+<style lang="sass">
+	ul
+		padding: 0
+</style>
