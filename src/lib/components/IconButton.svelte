@@ -25,12 +25,12 @@ button
     transition: background-color 0.1s ease-in-out
 
     &.highlight
-        background-color: rgba(0, 0, 0, 0.1)
+        background-color: rgba(0, 0, 0, 0.3)
 
     &:hover
-        background-color: rgba(0, 0, 0, 0.2)
+        background-color: rgba(0, 0, 0, 0.4)
     &:active
-        background-color: rgba(0, 0, 0, 0.3)
+        background-color: rgba(0, 0, 0, 0.5)
 
     span
         font-size: 3rem
