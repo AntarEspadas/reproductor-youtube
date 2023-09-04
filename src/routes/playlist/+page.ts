@@ -1,9 +1,10 @@
 import type { PageLoad } from './$types'
 import { youtubeApi } from '$lib/services'
+import { browser } from '$app/environment'
 
 export const load: PageLoad = ({ url }) => {
-	const params = url.searchParams
-	const playlistId = params.get('id') ?? ''
+	let playlistId = ''
+	if (browser) playlistId = url.searchParams.get('id') ?? ''
 	return Promise.resolve({
 		youtubeApi,
 		playlistId
