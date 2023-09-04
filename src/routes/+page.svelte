@@ -5,9 +5,11 @@
 		</div>
 	</div>
 	{#if promise}
-		<div class="results">
+		<div class="results" transition:fade>
 			{#await promise}
-				<p>loading...</p>
+				<div class="loading-container">
+					<Loading size="1.5rem" />
+				</div>
 			{:then searchResults}
 				<SearchResults {searchResults} />
 			{:catch error}
@@ -25,6 +27,7 @@
 	import type { PageData } from './$types'
 	import SearchBar from '$lib/components/search/SearchBar.svelte'
 	import SearchResults from '$lib/components/search/SearchResults.svelte'
+	import Loading from '$lib/components/Loading.svelte'
 	import type { Item, PlaylistSearchResult } from '$lib/youtube/types'
 	import { fade } from 'svelte/transition'
 	import { onMount } from 'svelte'
@@ -62,6 +65,12 @@
 </script>
 
 <style lang="sass">
+	.loading-container
+		position: absolute
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+
 	.search-container
 		position: absolute
 		top: 0

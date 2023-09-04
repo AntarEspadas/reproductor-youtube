@@ -1,7 +1,9 @@
 <SearchBar on:search={(e) => goto(`/?q=${e.detail.query}`)} />
 {#if promise}
 	{#await promise}
-		<p>loading...</p>
+		<div class="loading-container">
+			<Loading size="1.5rem" />
+		</div>
 	{:then [playlistItems, playlistInfo]}
 		<TitleBar title={playlistInfo.snippet.title} />
 		<PlaylistPlayer {playlistItems} />
@@ -15,6 +17,7 @@
 	import TitleBar from '$lib/components/TitleBar.svelte'
 	import PlaylistPlayer from '$lib/components/player/PlaylistPlayer.svelte'
 	import SearchBar from '$lib/components/search/SearchBar.svelte'
+	import Loading from '$lib/components/Loading.svelte'
 	import type { Item, PlaylistItems } from '$lib/youtube/types'
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
@@ -39,3 +42,11 @@
 		return [items, info.items[0]]
 	}
 </script>
+
+<style lang="sass">
+	.loading-container
+		position: absolute
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+</style>
