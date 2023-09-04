@@ -98,7 +98,7 @@
 		margin-right: var(--margin)
 		animation: shrink 0.2s ease-in-out
 		scale: var(--scale)
-		background-color: red
+		background-color: black
 		flex-shrink: 0
 		width: var(--width)
 		aspect-ratio: 16/9
