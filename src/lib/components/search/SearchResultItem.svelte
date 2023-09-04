@@ -1,5 +1,5 @@
 <li class:visible class="search-result-item" use:inview on:inview_enter={handleInviewEnter}>
-	<a href="/playlist?id={id}">
+	<a href="{base}/playlist?id={id}">
 		<div class="container">
 			<img src={snippet.thumbnails.default.url} alt="thumbnail" />
 			<h3>
@@ -13,6 +13,7 @@
 	import type { Snippet } from '$lib/youtube/types'
 	import { inview } from 'svelte-inview'
 	import { onMount } from 'svelte'
+	import { base } from '$app/paths'
 
 	export let id: string
 	export let snippet: Snippet

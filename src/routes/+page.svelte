@@ -32,6 +32,7 @@
 	import { fade } from 'svelte/transition'
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
+	import { base } from '$app/paths'
 
 	export let data: PageData
 
@@ -55,12 +56,12 @@
 		promise = youtubeApi.searchPlaylists(query)
 		const playlistInfo = await youtubeApi.playlistInfo(query)
 		if (playlistInfo.items?.at(0)?.id !== undefined) {
-			goto(`/playlist?id=${playlistInfo.items[0].id}`, { replaceState: true })
+			goto(`${base}/playlist?id=${playlistInfo.items[0].id}`, { replaceState: true })
 		}
 	}
 
 	async function handleSearch(e: CustomEvent<{ query: string }>) {
-		goto(`/?q=${e.detail.query}`)
+		goto(`${base}/?q=${e.detail.query}`)
 	}
 </script>
 

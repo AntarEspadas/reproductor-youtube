@@ -1,4 +1,4 @@
-<SearchBar on:search={(e) => goto(`/?q=${e.detail.query}`)} />
+<SearchBar on:search={(e) => goto(`${base}/?q=${e.detail.query}`)} />
 {#if promise}
 	{#await promise}
 		<div class="loading-container">
@@ -21,6 +21,7 @@
 	import type { Item, PlaylistItems } from '$lib/youtube/types'
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
+	import { base } from '$app/paths'
 
 	export let data: PageData
 
