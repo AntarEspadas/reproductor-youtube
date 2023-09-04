@@ -55,7 +55,7 @@
 		promise = youtubeApi.searchPlaylists(query)
 		const playlistInfo = await youtubeApi.playlistInfo(query)
 		if (playlistInfo.items?.at(0)?.id !== undefined) {
-			goto(`/playlist/${playlistInfo.items[0].id}`, { replaceState: true })
+			goto(`/playlist?id=${playlistInfo.items[0].id}`, { replaceState: true })
 		}
 	}
 

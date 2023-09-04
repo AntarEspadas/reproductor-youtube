@@ -1,5 +1,5 @@
 <li class:visible class="search-result-item" use:inview on:inview_enter={handleInviewEnter}>
-	<a href="/playlist/{id}">
+	<a href="/playlist?id={id}">
 		<div class="container">
 			<img src={snippet.thumbnails.default.url} alt="thumbnail" />
 			<h3>
