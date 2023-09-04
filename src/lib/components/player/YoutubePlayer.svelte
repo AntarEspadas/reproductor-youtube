@@ -15,6 +15,7 @@
 
 	onMount(() => {
 		const player = new YT.Player(id, {
+			host: 'https://www.youtube-nocookie.com',
 			height: '100%',
 			width: '100%',
 			videoId,
