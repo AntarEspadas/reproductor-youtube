@@ -11,7 +11,11 @@
 					<Loading size="1.5rem" />
 				</div>
 			{:then searchResults}
-				<SearchResults {searchResults} />
+				{#if searchResults.items.length > 0}
+					<SearchResults {searchResults} />
+				{:else}
+					<NoResults />
+				{/if}
 			{:catch error}
 				Se produjo un error
 			{/await}
@@ -28,6 +32,7 @@
 	import SearchBar from '$lib/components/search/SearchBar.svelte'
 	import SearchResults from '$lib/components/search/SearchResults.svelte'
 	import Loading from '$lib/components/Loading.svelte'
+	import NoResults from '$lib/components/search/NoResults.svelte'
 	import type { Item, PlaylistSearchResult } from '$lib/youtube/types'
 	import { fade } from 'svelte/transition'
 	import { onMount } from 'svelte'

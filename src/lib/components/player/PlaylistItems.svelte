@@ -123,6 +123,7 @@
 	// }
 
 	onMount(() => {
+		div?.scrollTo({ left: 0, behavior: 'instant' })
 		window.addEventListener('resize', () => {
 			windowWidth = window.innerWidth
 		})
