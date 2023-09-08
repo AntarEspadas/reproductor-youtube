@@ -58,7 +58,8 @@
 			if (selected) iframeVisible = true
 		}, 400)
 
-		$currentThumbnail = url
+		if (url) $currentThumbnail = url
+		else currentThumbnail.reset()
 	} else {
 		iframeVisible = false
 	}
