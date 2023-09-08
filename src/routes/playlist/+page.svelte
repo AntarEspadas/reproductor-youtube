@@ -1,3 +1,4 @@
+<div class="background" style="--background-image: url('{$currentThumbnail}')" />
 <SearchBar on:search={(e) => goto(`${base}/?q=${e.detail.query}`)} />
 {#if promise}
 	{#await promise}
@@ -22,6 +23,7 @@
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
 	import { base } from '$app/paths'
+	import { currentThumbnail } from '$lib/stores'
 
 	export let data: PageData
 
@@ -45,6 +47,20 @@
 </script>
 
 <style lang="sass">
+	.background
+		position: fixed
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		background-image: var(--background-image)
+		background-size: cover
+		transform: scale(1.2)
+		filter: blur(100px)
+		-webkit-mask-image: linear-gradient(to top, transparent, black)
+		mask-image: linear-gradient(to top, transparent, black)
+		z-index: -1
+		transition: background-image 1s ease-in-out
 	.loading-container
 		position: absolute
 		top: 50%

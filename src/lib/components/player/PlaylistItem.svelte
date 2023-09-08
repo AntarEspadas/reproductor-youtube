@@ -26,6 +26,7 @@
 	import { createEventDispatcher, onMount } from 'svelte'
 	import type { Item } from '$lib/youtube/types'
 	import YoutubePlayer from './YoutubePlayer.svelte'
+	import { currentThumbnail } from '$lib/stores'
 
 	export let item: Item
 	export let selected: boolean
@@ -56,6 +57,8 @@
 			// el timeout terminara, no mostrar el iframe
 			if (selected) iframeVisible = true
 		}, 400)
+
+		$currentThumbnail = url
 	} else {
 		iframeVisible = false
 	}

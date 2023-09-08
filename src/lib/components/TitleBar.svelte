@@ -18,4 +18,5 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2)
         padding: 1rem
         border-radius: 3rem
+        background-color: white
 </style>
